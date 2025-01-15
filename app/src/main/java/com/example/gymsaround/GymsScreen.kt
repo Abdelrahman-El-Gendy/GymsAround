@@ -34,6 +34,7 @@ import com.example.gymsaround.ui.theme.Purple200
 fun GymsScreen(modifier: Modifier = Modifier) {
 
     val vm: GymsViewModel = viewModel()
+    vm.getGyms()
     LazyColumn {
         items(vm.state) { gymItem ->
             GymItem(gymItem) {
