@@ -17,6 +17,7 @@ class GymsViewModel(
 
     var state by mutableStateOf(emptyList<Gym>())
     private lateinit var apiService: GymsApiService
+    private lateinit var gymCall: Call<List<Gym>>
 
     init {
         // 1- Create Retrofit Builder
@@ -26,10 +27,13 @@ class GymsViewModel(
             .build()
         //2- Integrating Builder and GymsApiServices Interface...
         apiService = retrofit.create(GymsApiService::class.java)
+
+        getGyms()
     }
 
-    fun getGyms() {
-        apiService.getGyms().enqueue(object : Callback<List<Gym>> {
+    private fun getGyms() {
+        gymCall = apiService.getGyms()
+        gymCall.enqueue(object : Callback<List<Gym>> {
             override fun onResponse(call: Call<List<Gym>>, response: Response<List<Gym>>) {
                 response.body()?.let {
                     state = it.restoreSelectedGym()
@@ -40,6 +44,11 @@ class GymsViewModel(
                 t.printStackTrace()
             }
         })
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        gymCall.cancel()
     }
 
     fun toggleFavouriteState(gymId: Int) {
