@@ -24,6 +24,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import androidx.wear.compose.material.ContentAlpha
 import androidx.wear.compose.material.LocalContentAlpha
 import com.example.gymsaround.ui.theme.GymsAroundTheme
@@ -33,10 +38,34 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            GymsScreen()
+            GymsAroundApp()
         }
+    }
+}
 
+@Composable
+fun GymsAroundApp(modifier: Modifier = Modifier) {
+    val navController = rememberNavController()
+    NavHost(
+        navController = navController,
+        startDestination = "gyms"
+    ) {
+        composable(route = "gyms") {
+            GymsScreen { id ->
+                navController.navigate("gyms/$id")
 
+            }
+        }
+        composable(
+            route = "gyms/{gym_id}",
+            arguments = listOf(
+                navArgument("gym_id") {
+                    type = NavType.IntType
+                }
+            )
+        ) {
+            GymDetailsScreen()
+        }
     }
 }
 
