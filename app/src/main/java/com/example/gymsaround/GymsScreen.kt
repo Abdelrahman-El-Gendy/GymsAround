@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.ContentAlpha
 import androidx.wear.compose.material.LocalContentAlpha
@@ -67,7 +68,7 @@ fun GymItem(
     Card(
         elevation = CardDefaults.cardElevation(4.dp),
         modifier = Modifier
-            .padding(8.dp)
+            .padding(6.dp)
             .clickable { onItemClick(gym.id) }
     )
     {
@@ -122,11 +123,12 @@ fun GymDetails(
     modifier: Modifier,
     horizontalAlignment: Alignment.Horizontal = Alignment.Start
 ) {
-    Column(modifier = modifier.padding(8.dp)) {
+    Column(modifier = modifier.padding(2.dp)) {
         Text(
             text = gym.name,
             style = MaterialTheme.typography.headlineSmall,
             color = Purple200,
+            fontSize = 20.sp
         )
         CompositionLocalProvider(
             LocalContentAlpha provides ContentAlpha.medium
@@ -134,7 +136,8 @@ fun GymDetails(
 
             Text(
                 text = gym.address,
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
+                fontSize = 14.sp
             )
         }
     }
