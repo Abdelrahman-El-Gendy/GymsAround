@@ -10,7 +10,7 @@ data class Gym(
 
     @PrimaryKey
     @ColumnInfo("gym_id")
-    var id: Int,
+    val id: Int,
 
     @ColumnInfo("gym_name")
     @SerializedName("gym_name")
@@ -23,5 +23,6 @@ data class Gym(
     @SerializedName("is_open")
     val isOpen: Boolean,
 
-    var isFavourite: Boolean = false
+    @ColumnInfo("is_favourite")
+    val isFavourite: Boolean = false
 )

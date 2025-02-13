@@ -13,6 +13,6 @@ class GymsApplication : Application() {
 
     companion object {
         private lateinit var application: GymsApplication
-        fun getGymContext(): Context = application.applicationContext
+        fun getApplicationContext(): Context = application.applicationContext
     }
 }
