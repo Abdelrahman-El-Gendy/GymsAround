@@ -24,11 +24,13 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavDeepLink
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import androidx.wear.compose.material.ContentAlpha
 import androidx.wear.compose.material.LocalContentAlpha
 import com.example.gymsaround.ui.theme.GymsAroundTheme
@@ -61,6 +63,11 @@ fun GymsAroundApp(modifier: Modifier = Modifier) {
             arguments = listOf(
                 navArgument("gym_id") {
                     type = NavType.IntType
+                }
+            ),
+            deepLinks = listOf(
+                navDeepLink {
+                    uriPattern = "https://www.gymsaround.com/details/{gym_id}"
                 }
             )
         ) {
