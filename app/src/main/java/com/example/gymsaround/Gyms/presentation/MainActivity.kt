@@ -1,40 +1,20 @@
-package com.example.gymsaround
+package com.example.gymsaround.Gyms.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Place
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavDeepLink
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
-import androidx.wear.compose.material.ContentAlpha
-import androidx.wear.compose.material.LocalContentAlpha
-import com.example.gymsaround.ui.theme.GymsAroundTheme
-import com.example.gymsaround.ui.theme.Purple80
+import com.example.gymsaround.Gyms.domain.Gym
+import com.example.gymsaround.Gyms.presentation.details.GymDetailsScreen
+import com.example.gymsaround.Gyms.presentation.gymslist.GymsScreen
+import com.example.gymsaround.Gyms.presentation.gymslist.GymsViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,11 +32,16 @@ fun GymsAroundApp(modifier: Modifier = Modifier) {
         navController = navController,
         startDestination = "gyms"
     ) {
+        val vm = GymsViewModel()
         composable(route = "gyms") {
-            GymsScreen { id ->
-                navController.navigate("gyms/$id")
-
-            }
+            GymsScreen(
+                state = vm.state.value,
+                onItemClick = { id ->
+                    navController.navigate("gyms/$id")
+                }, onFavouriteIconClick = { id, oldState ->
+                    vm.toggleFavouriteState(id,oldState)
+                }
+            )
         }
         composable(
             route = "gyms/{gym_id}",

@@ -1,5 +1,7 @@
-package com.example.gymsaround
+package com.example.gymsaround.Gyms.data
 
+import com.example.gymsaround.Gyms.domain.Gym
+import com.example.gymsaround.Gyms.data.remote.GymsApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -14,7 +16,14 @@ class GymsDetailsRepository {
 
 
     suspend fun getGymFromRemoteDB(id: Int) = withContext(Dispatchers.IO) {
-        gymsApiService.getGym(id).values.first()
+        gymsApiService.getGym(id).values.first().let {
+            Gym(
+                id = it.id,
+                name = it.name,
+                address = it.address,
+                isOpen = it.isOpen,
+            )
+        }
     }
 
 }

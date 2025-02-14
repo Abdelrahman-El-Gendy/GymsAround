@@ -1,4 +1,6 @@
-package com.example.gymsaround
+package com.example.gymsaround.Gyms.presentation.gymslist
+
+import com.example.gymsaround.Gyms.domain.Gym
 
 data class GymsScreenState(
     var isLoading: Boolean,

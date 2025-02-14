@@ -1,4 +1,4 @@
-package com.example.gymsaround
+package com.example.gymsaround.Gyms.presentation.gymslist
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
@@ -7,13 +7,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.gymsaround.Gyms.domain.GetInitialGymsUseCase
+import com.example.gymsaround.Gyms.domain.ToggleFavouriteStateUseCase
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class GymsViewModel : ViewModel() {
 
-    private val repo: GymsScreenRepository = GymsScreenRepository()
+    private val getInitialGymsUseCase = GetInitialGymsUseCase()
+    private val toggleFavouriteStateUseCase = ToggleFavouriteStateUseCase()
 
     private var _state by mutableStateOf(
         GymsScreenState(
@@ -35,11 +37,12 @@ class GymsViewModel : ViewModel() {
     init {
 
         getGyms()
+
     }
 
     private fun getGyms() {
         viewModelScope.launch(errorHandler) {
-            val receivedGyms = repo.getAllGyms()
+            val receivedGyms = getInitialGymsUseCase()
             _state = _state.copy(
                 gyms = receivedGyms,
                 isLoading = false
@@ -48,12 +51,14 @@ class GymsViewModel : ViewModel() {
     }
 
 
-    fun toggleFavouriteState(gymId: Int) {
-        val gyms = _state.gyms.toMutableList()
-        val indexItem = gyms.indexOfFirst { it.id == gymId }
+    fun toggleFavouriteState(gymId: Int, oldState: Boolean) {
+//        val gyms = _state.gyms.toMutableList()
+//        val indexItem = gyms.indexOfFirst { it.id == gymId }
 
         viewModelScope.launch {
-            val updatedGymsList = repo.toggleFavouriteGym(gymId, !gyms[indexItem].isFavourite)
+            //  val updatedGymsList = repo.toggleFavouriteGym(gymId, !gyms[indexItem].isFavourite)
+            // val updatedGymsList = toggleFavouriteStateUseCase(gymId, gyms[indexItem].isFavourite)
+            val updatedGymsList = toggleFavouriteStateUseCase(gymId, oldState)
             _state = _state.copy(
                 gyms = updatedGymsList
             )
