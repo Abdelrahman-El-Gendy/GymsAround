@@ -1,4 +1,4 @@
-package com.example.gymsaround
+package com.example.gymsaround.Gyms.data.local
 
 import android.content.Context
 import androidx.room.Database
@@ -6,8 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Gym::class],
-    version = 1,
+    entities = [LocalGym::class],
+    version = 3,
     // if we want Room lib to create folder in external storage and save \ put Database scheme
     exportSchema = false
 )

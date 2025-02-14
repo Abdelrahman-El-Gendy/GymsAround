@@ -1,14 +1,12 @@
-package com.example.gymsaround
+package com.example.gymsaround.Gyms.presentation.details
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
+import com.example.gymsaround.Gyms.data.GymsDetailsRepository
+import com.example.gymsaround.Gyms.domain.Gym
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class GymsDetailsViewModel(
     private val savedStateHandle: SavedStateHandle

@@ -1,11 +1,10 @@
-package com.example.gymsaround
+package com.example.gymsaround.Gyms.data.local
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
 @Entity
-data class GymFavouriteState(
+data class LocalGymFavouriteState(
     @ColumnInfo("gym_id")
     val id: Int,
 

@@ -1,4 +1,4 @@
-package com.example.gymsaround
+package com.example.gymsaround.Gyms.data.remote
 
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -6,10 +6,10 @@ import retrofit2.http.Query
 interface GymsApiService {
 
     @GET("gyms.json")
-    suspend fun getGyms(): List<Gym>
+    suspend fun getGyms(): List<RemoteGym>
 
     @GET("gyms.json?orderBy=\"id\"")
     suspend fun getGym(
         @Query("equalTo") id: Int
-    ): Map<String, Gym>
+    ): Map<String, RemoteGym>
 }

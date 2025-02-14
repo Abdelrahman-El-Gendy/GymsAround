@@ -1,4 +1,4 @@
-package com.example.gymsaround
+package com.example.gymsaround.Gyms.presentation.gymslist
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -30,13 +30,19 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.ContentAlpha
 import androidx.wear.compose.material.LocalContentAlpha
+import com.example.gymsaround.Gyms.domain.Gym
 import com.example.gymsaround.ui.theme.Purple200
 
 @Composable
-fun GymsScreen(onItemClick: (id: Int) -> Unit) {
+fun GymsScreen(
+    onItemClick: (id: Int) -> Unit,
+    state: GymsScreenState,
+    onFavouriteIconClick: (Int, Boolean) -> Unit
 
-    val vm: GymsViewModel = viewModel()
-    val state = vm.state.value
+) {
+
+//    val vm: GymsViewModel = viewModel()
+//    val state = vm.state.value
 
     Box(
         modifier = Modifier.fillMaxWidth(),
@@ -48,7 +54,9 @@ fun GymsScreen(onItemClick: (id: Int) -> Unit) {
             items(state.gyms) { gymItem ->
                 GymItem(
                     gym = gymItem,
-                    onFavouriteIconClick = { vm.toggleFavouriteState(it) },
+                    onFavouriteIconClick = { id, oldState ->
+                        onFavouriteIconClick(id, oldState)
+                    },
                     onItemClick = { id -> onItemClick(id) }
                 )
             }
@@ -68,7 +76,7 @@ fun GymsScreen(onItemClick: (id: Int) -> Unit) {
 @Composable
 fun GymItem(
     gym: Gym,
-    onFavouriteIconClick: (id: Int) -> Unit,
+    onFavouriteIconClick: (id: Int, oldState: Boolean) -> Unit,
     onItemClick: (id: Int) -> Unit
 ) {
     // State Hoisting (Leveling Up)
@@ -96,7 +104,7 @@ fun GymItem(
                 Modifier.weight(0.15f),
                 contentDescription = "Favourite Gym Icon"
             ) {
-                onFavouriteIconClick(gym.id)
+                onFavouriteIconClick(gym.id , gym.isFavourite)
             }
 
         }
