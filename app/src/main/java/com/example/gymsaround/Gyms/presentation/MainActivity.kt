@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -15,7 +16,10 @@ import com.example.gymsaround.Gyms.domain.Gym
 import com.example.gymsaround.Gyms.presentation.details.GymDetailsScreen
 import com.example.gymsaround.Gyms.presentation.gymslist.GymsScreen
 import com.example.gymsaround.Gyms.presentation.gymslist.GymsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,14 +36,14 @@ fun GymsAroundApp(modifier: Modifier = Modifier) {
         navController = navController,
         startDestination = "gyms"
     ) {
-        val vm = GymsViewModel()
         composable(route = "gyms") {
+            val vm: GymsViewModel = hiltViewModel()
             GymsScreen(
                 state = vm.state.value,
                 onItemClick = { id ->
                     navController.navigate("gyms/$id")
                 }, onFavouriteIconClick = { id, oldState ->
-                    vm.toggleFavouriteState(id,oldState)
+                    vm.toggleFavouriteState(id, oldState)
                 }
             )
         }

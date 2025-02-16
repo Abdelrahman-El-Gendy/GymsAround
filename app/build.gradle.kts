@@ -11,6 +11,10 @@ plugins {
 
     // KSP (annotation processing)
     id("com.google.devtools.ksp") version "2.0.21-1.0.27"
+
+    //hilt
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -85,4 +89,17 @@ dependencies {
     implementation("androidx.room:room-runtime:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
+
+
+    //hilt
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+}
+
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }

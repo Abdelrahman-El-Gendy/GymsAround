@@ -9,13 +9,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gymsaround.Gyms.domain.GetInitialGymsUseCase
 import com.example.gymsaround.Gyms.domain.ToggleFavouriteStateUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class GymsViewModel : ViewModel() {
+@HiltViewModel
+class GymsViewModel @Inject constructor(
+    private val getInitialGymsUseCase: GetInitialGymsUseCase,
+    private val toggleFavouriteStateUseCase: ToggleFavouriteStateUseCase
+) : ViewModel() {
 
-    private val getInitialGymsUseCase = GetInitialGymsUseCase()
-    private val toggleFavouriteStateUseCase = ToggleFavouriteStateUseCase()
 
     private var _state by mutableStateOf(
         GymsScreenState(

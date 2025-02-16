@@ -8,13 +8,14 @@ import com.example.gymsaround.Gyms.data.GymsDetailsRepository
 import com.example.gymsaround.Gyms.domain.Gym
 import kotlinx.coroutines.launch
 
+
 class GymsDetailsViewModel(
-    private val savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     val state = mutableStateOf<Gym?>(null)
 
 
-    val repo: GymsDetailsRepository = GymsDetailsRepository()
+    private val repo: GymsDetailsRepository = GymsDetailsRepository()
 
     init {
         val gymId = savedStateHandle.get<Int>("gym_id") ?: 0
