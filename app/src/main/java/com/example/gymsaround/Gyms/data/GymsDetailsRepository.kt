@@ -12,7 +12,8 @@ class GymsDetailsRepository {
     private val gymsApiService: GymsApiService = Retrofit.Builder()
         .baseUrl("https://gyms-295f1-default-rtdb.firebaseio.com/")
         .addConverterFactory(GsonConverterFactory.create())
-        .build().create(GymsApiService::class.java)
+        .build()
+        .create(GymsApiService::class.java)
 
 
     suspend fun getGymFromRemoteDB(id: Int) = withContext(Dispatchers.IO) {

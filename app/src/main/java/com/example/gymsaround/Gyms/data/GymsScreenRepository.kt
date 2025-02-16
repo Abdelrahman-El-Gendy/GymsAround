@@ -1,5 +1,6 @@
 package com.example.gymsaround.Gyms.data
 
+import com.example.gymsaround.Gyms.data.local.GymsDao
 import com.example.gymsaround.Gyms.domain.Gym
 import com.example.gymsaround.Gyms.data.remote.GymsApiService
 import com.example.gymsaround.GymsApplication
@@ -10,16 +11,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-class GymsScreenRepository {
-    private val gymsDao = GymsDatabase.getDaoInstance(GymsApplication.getApplicationContext())
-
-    private var apiService: GymsApiService =
-        Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://gyms-295f1-default-rtdb.firebaseio.com/")
-            .build()
-            .create(GymsApiService::class.java)
+class GymsScreenRepository @Inject constructor(
+    private val gymsDao: GymsDao,
+    private val apiService: GymsApiService
+) {
 
     suspend fun toggleFavouriteGym(gymId: Int, state: Boolean) =
         withContext(Dispatchers.IO) {
