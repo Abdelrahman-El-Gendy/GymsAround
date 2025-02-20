@@ -25,12 +25,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.ContentAlpha
 import androidx.wear.compose.material.LocalContentAlpha
 import com.example.gymsaround.Gyms.domain.Gym
+import com.example.gymsaround.Gyms.presentation.SemanticsDescription
 import com.example.gymsaround.ui.theme.Purple200
 
 @Composable
@@ -61,7 +63,11 @@ fun GymsScreen(
                 )
             }
         }
-        if (state.isLoading) CircularProgressIndicator()
+        if (state.isLoading) CircularProgressIndicator(
+            Modifier.semantics {
+                this.contentDescription = SemanticsDescription.GYMS_LIST_LOADING
+            }
+        )
         state.error?.let { errorText ->
             Text(text = errorText)
         }
@@ -104,7 +110,7 @@ fun GymItem(
                 Modifier.weight(0.15f),
                 contentDescription = "Favourite Gym Icon"
             ) {
-                onFavouriteIconClick(gym.id , gym.isFavourite)
+                onFavouriteIconClick(gym.id, gym.isFavourite)
             }
 
         }

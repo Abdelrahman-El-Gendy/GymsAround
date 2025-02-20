@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 class GymsDetailsViewModel(
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
+
     val state = mutableStateOf<Gym?>(null)
 
 

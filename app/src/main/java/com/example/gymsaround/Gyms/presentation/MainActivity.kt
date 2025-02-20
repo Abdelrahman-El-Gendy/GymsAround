@@ -12,7 +12,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
-import com.example.gymsaround.Gyms.domain.Gym
 import com.example.gymsaround.Gyms.presentation.details.GymDetailsScreen
 import com.example.gymsaround.Gyms.presentation.gymslist.GymsScreen
 import com.example.gymsaround.Gyms.presentation.gymslist.GymsViewModel
