@@ -62,14 +62,18 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.compose.material)
     implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.ui.test.junit4.android)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.1")
+
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
