@@ -1,6 +1,6 @@
 package com.example.gymsaround
 
-import com.example.gymsaround.Gyms.domain.RemoteGym
+import com.example.gymsaround.Gyms.data.remote.RemoteGym
 
 object DummyGymsList {
 
