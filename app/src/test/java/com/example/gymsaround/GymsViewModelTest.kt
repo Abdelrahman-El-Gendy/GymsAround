@@ -57,7 +57,7 @@ class GymsViewModelTest {
 
     private fun getViewModel(): GymsViewModel {
         val repository =
-            GymsScreenRepository(TestDatabaseDao(),TestApiService(),dispatcher)
+            GymsScreenRepository(TestGymsDao(), TestGymsApiService(), dispatcher)
         val sortedGymsUseCase = GetSortedGymsUseCase(repository)
         val getInitialGymsUseCase = GetInitialGymsUseCase(repository, sortedGymsUseCase)
         val toggleFavouriteStateUseCase = ToggleFavouriteStateUseCase(repository, sortedGymsUseCase)
@@ -69,7 +69,7 @@ class GymsViewModelTest {
     }
 }
 
-class TestApiService : GymsApiService {
+class TestGymsApiService : GymsApiService {
 
 
     override suspend fun getGyms(): List<RemoteGym> {
@@ -82,7 +82,7 @@ class TestApiService : GymsApiService {
 
 }
 
-class TestDatabaseDao : GymsDao {
+class TestGymsDao : GymsDao {
     private val gyms = HashMap<Int, LocalGym>()
 
     override suspend fun getAllGyms(): List<LocalGym> {

@@ -13,13 +13,10 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="onItemClick_isActive()">
+      <SelectionState runConfigName="useAppContext()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="GymsScreenTest">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="loadingContentState_iaActive()">
+      <SelectionState runConfigName="loadingState_isActive()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
