@@ -23,20 +23,19 @@
 - **Coroutines**: For asynchronous operations  
 
 ## Project Structure
-<h3>Project Structure</h3>
 
 <pre>
 com.example.gymsaround/
 ├── Gyms/
-│   ├── data/                          <span style="color: gray;"># Data layer components</span>
-│   ├── domain/                        <span style="color: gray;"># Business logic and models</span>
+│   ├── data/                          
+│   ├── domain/                       
 │   └── presentation/
-│       ├── details/                   <span style="color: gray;"># Gym details screen components</span>
-│       ├── gymslist/                  <span style="color: gray;"># Gyms list screen components</span>
-│       └── SemanticsDescription.kt    <span style="color: gray;"># Accessibility constants</span>
-├── di/                                <span style="color: gray;"># Dependency injection setup</span>
-├── ui/                                <span style="color: gray;"># Theme and styling</span>
-└── GymsApplication.kt                 <span style="color: gray;"># Application class</span>
+│       ├── details/                   
+│       ├── gymslist/                  
+│       └── SemanticsDescription.kt 
+├── di/                               
+├── ui/                               
+└── GymsApplication.kt                 
 </pre>
 
 
